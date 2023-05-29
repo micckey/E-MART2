@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import useAuthContext from '../contexts/authcontexts'
 
 export default function Dashboard() {
+
+  const {user, getUser} = useAuthContext();
+
+  useEffect(() => {
+    if(!user){
+      getUser();
+    }
+  }, [])
+
   return (
-    <div>Dashboard</div>
+    <div>
+      {user?.Customers_fname}
+    </div>
   )
 }
