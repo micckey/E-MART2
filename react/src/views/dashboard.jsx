@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import useAuthContext from '../contexts/authcontexts'
 
 export default function Dashboard() {
 
-  const {user, getUser} = useAuthContext();
-
-  useEffect(() => {
-    if(!user){
-      getUser();
-    }
-  }, [])
+  const { user, logout } = useAuthContext();
 
   return (
     <div>
       {user?.Customers_fname}
+
+      <button onClick={logout}>logout</button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axiosauth from "../assets/axiosauth";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async ({ ...data }) => {
         await csrf();
+        setErrors([]);
         try {
             await axiosauth.post('/login', data)
             await getUser();
@@ -30,9 +31,10 @@ export const AuthProvider = ({ children }) => {
 
     const register = async ({ ...data }) => {
         await csrf();
+        setErrors([]);
         try {
             await axiosauth.post('/register', data)
-            getUser();
+            await getUser();
             navigate('/dashboard')
         } catch (e) {
             if (e.response.status === 422) {
@@ -41,7 +43,19 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    return <AuthContext.Provider value={{ user, errors, getUser, login, register }}>
+    const logout = () => {
+        axiosauth.post('/logout').then(() => {
+            setUser(null);
+        })
+    }
+
+    useEffect(() => {
+        if(!user){
+          getUser();
+        }
+      }, [])
+
+    return <AuthContext.Provider value={{ user, errors, getUser, login, register, logout }}>
         {children}
     </AuthContext.Provider>
 
