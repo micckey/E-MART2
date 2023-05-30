@@ -11,8 +11,16 @@ export const AuthProvider = ({ children }) => {
     const csrf = () => axiosauth.get('/sanctum/csrf-cookie');
 
     const getUser = async () => {
-        const { data } = await axiosauth.get('/api/user');
-        setUser(data);
+        // const { data } = await axiosauth.get('/api/user');
+        // setUser(data);
+        try {
+            const { data } = await axiosauth.get('/api/user');
+            setUser(data);
+        } catch (e) {
+            if (e.response.status === 401) {
+                console.log('Unauthorised')
+            }
+        }
     }
 
     const login = async ({ ...data }) => {
@@ -50,10 +58,10 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        if(!user){
-          getUser();
+        if (!user) {
+            getUser();
         }
-      }, [])
+    }, [])
 
     return <AuthContext.Provider value={{ user, errors, getUser, login, register, logout }}>
         {children}
@@ -61,6 +69,6 @@ export const AuthProvider = ({ children }) => {
 
 }
 
-export default function useAuthContext(){
-    return useContext(AuthContext);       
+export default function useAuthContext() {
+    return useContext(AuthContext);
 }

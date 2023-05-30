@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css'
 
 import Login from './views/login';
@@ -6,6 +6,7 @@ import Signup from './views/signup';
 import Dashboard from './views/dashboard';
 import DefaultLayout from './authstates/defaultlayout';
 import GuestLayout from './authstates/guestlayout';
+import Index from './views';
 import NotFound from './views/notfound';
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
         <Route path="/" element={<GuestLayout />} >
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Index />} />
         </Route>
 
         <Route path="/" element={<DefaultLayout />} >
