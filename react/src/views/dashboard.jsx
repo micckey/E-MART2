@@ -21,7 +21,7 @@ export default function Dashboard() {
   }
 
   const newProduct = () => {
-    navigate('/new/product')
+    navigate('/new-product')
   }
 
   const useToggleMenu = (initialState = false) => {
