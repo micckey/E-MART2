@@ -5,6 +5,7 @@ import useAuthContext from '../contexts/authcontexts';
 export default function GuestLayout() {
 
     const  { user }  = useAuthContext();
+    
 
     return !user ? <Outlet /> : <Navigate to={'/dashboard'} />
 

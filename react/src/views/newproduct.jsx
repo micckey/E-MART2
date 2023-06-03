@@ -63,6 +63,10 @@ const Newproduct = () => {
         }
     };
 
+    const cancel = () => {
+        navigate('/dashboard')
+    }
+
 
     return (
         <div>
@@ -73,7 +77,7 @@ const Newproduct = () => {
                             <h1>Add Product</h1>
                         </div>
                         <div className="titleItem">
-                            <button className="btn" >
+                            <button className="btn" onClick={cancel}>
                                 Cancel
                             </button>
                         </div>

@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axiosauth from "../assets/axiosauth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [errors, setErrors] = useState([]);
+    const location = useLocation();
     const navigate = useNavigate();
     const csrf = () => axiosauth.get('/sanctum/csrf-cookie');
 
@@ -29,7 +30,12 @@ export const AuthProvider = ({ children }) => {
         try {
             await axiosauth.post('/login', data)
             await getUser();
-            navigate('/dashboard')
+            if(location.state?.from){
+                navigate(location.state.from)
+            }else{
+                navigate('/dashboard')
+            }  
+                      
         } catch (e) {
             if (e.response.status === 422) {
                 setErrors(e.response.data.errors)
