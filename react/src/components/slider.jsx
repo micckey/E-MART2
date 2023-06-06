@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+
 import { Link } from 'react-router-dom';
 import axiosApi from '../assets/axiosapi';
 
@@ -43,12 +45,12 @@ const Slider = () => {
                 smartSpeed={1000}>
                 {products.map((product, index) => (
                     <div className="media-29101" key={index}>
-                        <Link to='/new/order'>
+                        <Link to='/new-order'>
                             <img src={`http://localhost:8000/upload/${product.Products_image}`} alt="Image" className="img-fluid" />
                         </Link>
-                        <h3>
-                            <a href="#">{product.Products_name}</a>
-                        </h3>
+                        
+                        <h5 className='mx-auto'> <Link to='/new-order' >{product.Products_name}</Link> </h5>
+                        
                     </div>
                 ))}
             </OwlCarousel>
@@ -64,12 +66,12 @@ const Slider = () => {
                 smartSpeed={1000}>
                 {products.map((product, index) => (
                     <div className="media-29101" key={index}>
-                        <Link to='/new/order'>
+                        <Link to='/new-order'>
                             <img src={`http://localhost:8000/upload/${product.Products_image}`} alt="Image" className="img-fluid" />
                         </Link>
-                        <h3>
-                            <a href="#">{product.Products_name}</a>
-                        </h3>
+                        
+                        <h5 className='mx-auto'> <Link to='/new-order' >{product.Products_name}</Link> </h5>
+                        
                     </div>
                 ))}
             </OwlCarousel>

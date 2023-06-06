@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
             setUser(data);
         } catch (e) {
             if (e.response.status === 401) {
-                console.log('Unauthorised')
+                // console.log('Unauthorised')
+                return;
             }
         }
     }

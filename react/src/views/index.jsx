@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from "react";
-import axiosApi from "../assets/axiosapi";
+import React from "react";
 import Slider from "../components/slider";
 import NavBar from "../components/navbar";
+import Categories from "../components/categories";
+import { Link } from "react-router-dom";
 
 const Index = () => {
 
-    const [products, setproducts] = useState([]);
-    useEffect(() => {
-        getProducts()
-    }, [])
-    const getProducts = async () => {
-        await axiosApi.get('/api/get_products')
-            .then(({ data }) => {
-                setproducts(data.products)
-                localStorage.setItem('products', JSON.stringify(data.products))
-            })
-    }
+
 
 
     return (
@@ -25,24 +16,10 @@ const Index = () => {
 
             <Slider />
 
-            <div className="containerCust">
-                <h2 className="hotDeals">CATEGORIES</h2>
-                <div className="card-container">
-                    {products.length > 0 && (
-                        products.map((image, index) => (
-                            <div className="cardItem" key={index}>
-                                <h4>{image.Products_category}</h4>
-                                <img src={`http://localhost:8000/upload/${image.Products_image}`} alt={`Slide ${index + 1}`} />
-                                <h4>{image.Products_name}</h4>
-                                <a href="/login" className="btnBook mx-auto mt-auto" >ORDER NOW</a>
-                            </div>
-                        ))
-                    )}
-                </div>
-            </div>
+            <Categories />
 
             <div className="homeButton">
-                <a href="#">Back to tthe top</a>
+                <Link to={'#'}>Back to tthe top</Link>
             </div>
 
             <div className="containerCust contactsContainer">

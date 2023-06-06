@@ -9,6 +9,7 @@ import GuestLayout from './authstates/guestlayout';
 import Index from './views';
 import Newproduct from './views/newproduct';
 import NotFound from './views/notfound';
+import OrderPage from './views/orderpage';
 
 const App = () => (
   
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/new-product" element={<Newproduct />} />
+          <Route path="/new-order" element={<OrderPage />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
